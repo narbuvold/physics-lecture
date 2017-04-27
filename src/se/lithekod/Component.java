@@ -23,7 +23,7 @@ public class Component extends JComponent {
         setInput();
         try {
             player = ImageIO.read(new File(FileSystems.getDefault().getPath(
-                    "datar", "GlowingNugget.png").toUri()));
+                    "data", "GlowingNugget.png").toUri()));
         } catch (IOException e) {
             System.out.println("Image not found");
             player = new BufferedImage(50, 50, BufferedImage.TYPE_3BYTE_BGR);
@@ -39,12 +39,15 @@ public class Component extends JComponent {
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.RED);
-        g2.fillRect(0, 0, WIDTH, HEIGHT);
+        g2.fillRect(0, 0, WIDTH, HEIGHT);   // Draw background
         Point pos = game.getPosition();
-        g2.setColor(Color.BLUE);
-        g2.drawImage(player, pos.x - game.radius/2, pos.y - game.radius/2,
-                game.radius, game.radius, null);
+        g2.drawImage(player, pos.x - game.radius, pos.y - game.radius,
+                game.radius*2, game.radius*2, null);    // Draw player
     }
+
+    /**
+     * Set up key listener to notify game object of user input
+     */
     private void setInput() {
         getInputMap().put(KeyStroke.getKeyStroke("UP"), "UP");
         getActionMap().put("UP", new AbstractAction() {

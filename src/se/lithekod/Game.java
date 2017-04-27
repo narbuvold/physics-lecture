@@ -12,11 +12,11 @@ public class Game {
     private boolean movingDown;
     private boolean movingLeft;
     private boolean movingRight;
-    private int speed;
+    private int speed;      // Player speed in pixels / second
 
     public Game() {
         this.position = new Point(222, 333);
-        this.radius = 50;
+        this.radius = 20;
         this.movingDown = false;
         this.movingUp = false;
         this.movingLeft = false;
@@ -24,10 +24,14 @@ public class Game {
         this.speed = 200;
     }
 
+    /**
+     * Update the game model based on time passed since last update
+     * @param updateTime    Time since last update
+     */
     public void update(double updateTime) {
         double dx = 0;
         double dy = 0;
-        double tmp = this.speed * updateTime * 0.001; // Convert milliseconds to seconds
+        double tmp = this.speed * updateTime * 0.001;       // Convert milliseconds to seconds
         if ((movingLeft || movingRight) && (!movingLeft || !movingRight)) {
             dx = (movingLeft ? -tmp : tmp);
         }
@@ -41,6 +45,9 @@ public class Game {
         return position;
     }
 
+    /**
+     * Update which directions the player is trying to move in
+     */
     public void move(Direction dir, boolean val) {
         switch (dir){
             case UP:
