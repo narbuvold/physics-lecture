@@ -31,12 +31,12 @@ public class Game {
     public void update(double updateTime) {
         double dx = 0;
         double dy = 0;
-        double tmp = this.speed * updateTime * 0.001;       // Convert milliseconds to seconds
+        double movement = this.speed * updateTime * 0.001;       // Convert milliseconds to seconds
         if ((movingLeft || movingRight) && (!movingLeft || !movingRight)) {
-            dx = (movingLeft ? -tmp : tmp);
+            dx = (movingLeft ? -movement : movement);
         }
         if ((movingUp || movingDown) && !(movingUp && movingDown)) {
-            dy = (movingUp ? -tmp : tmp);
+            dy = (movingUp ? -movement : movement);
         }
         this.position.translate((int) dx, (int) dy);
     }
@@ -48,18 +48,18 @@ public class Game {
     /**
      * Update which directions the player is trying to move in
      */
-    public void move(Direction dir, boolean val) {
+    public void move(String dir, boolean val) {
         switch (dir){
-            case UP:
+            case "UP":
                 movingUp = val;
                 break;
-            case DOWN:
+            case "DOWN":
                 movingDown = val;
                 break;
-            case LEFT:
+            case "LEFT":
                 movingLeft = val;
                 break;
-            case RIGHT:
+            case "RIGHT":
                 movingRight = val;
                 break;
         }
